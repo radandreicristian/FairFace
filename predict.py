@@ -72,7 +72,7 @@ def predidct_age_gender_race(save_prediction_at, imgs_path = 'cropped_faces/'):
 
     model_fair_4 = torchvision.models.resnet34(pretrained=True)
     model_fair_4.fc = nn.Linear(model_fair_4.fc.in_features, 18)
-    if torch.cuda.is_available:
+    if torch.cuda.is_available():
         model_fair_4.load_state_dict(torch.load('dlib_models/res34_fair_align_multi_4_20190809.pt'))
     else:
         model_fair_4.load_state_dict(torch.load('dlib_models/res34_fair_align_multi_4_20190809.pt', map_location=torch.device('cpu')))
@@ -214,7 +214,7 @@ if __name__ == "__main__":
     parser.add_argument('--csv', dest='input_csv', action='store',
                         help='csv file of image path where col name for image path is "img_path')
 
-    dlib.DLIB_USE_CUDA = torch.cuda.is_available
+    dlib.DLIB_USE_CUDA = torch.cuda.is_available()
 
     print("using CUDA?: %s" % dlib.DLIB_USE_CUDA)
     args = parser.parse_args()
